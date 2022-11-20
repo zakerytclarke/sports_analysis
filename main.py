@@ -119,11 +119,16 @@ class ObjectTracker:
         image = Image.open(image_path+".jpg")
         draw = ImageDraw.Draw(image)
         for object in self.objects:
-          for i in range(0,len(object.xs)):
-            x=object.xs[i]+object.oxs[i]
-            y=object.ys[i]+object.oys[i]
-            draw.rectangle((x, y,x+2,y+2), width=5, fill='blue')
-          draw.rectangle((x, y,x+object.vxs[-1],y+object.vys[-1]), width=5, fill='blue')
+          ox = 0
+          oy = 0
+          for i in range(len(object.xs)-1,0,-1):
+            x=object.xs[i]+ox
+            y=object.ys[i]+oy
+            ox += object.oxs[i]
+            oy += 0 #object.oys[i]
+
+            draw.rectangle((x, y,object.xs[i-1],y+object.ys[i-1]), width=5, fill='blue')
+          draw.line((x, y,x+object.vxs[-1],y+object.vys[-1]), width=1, fill='red')
         image.save(image_path+"_annotated.jpg")
         frame_count += 1
       count += 1
