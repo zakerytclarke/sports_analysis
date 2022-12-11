@@ -32,4 +32,4 @@ sports_game = ObjectTracker({
 sports_game.process()
 ```
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](/sample.mp4)
+<img src="sample.gif" style="width:60%;">
